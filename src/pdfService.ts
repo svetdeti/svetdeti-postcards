@@ -127,7 +127,6 @@ export async function modifyPdf(
   const regularFont = await pdfDoc.embedFont(regularFontBytes);
   const boldFont = await pdfDoc.embedFont(boldFontBytes);
   const extraBoldFont = await pdfDoc.embedFont(extraBoldFontBytes);
-  //   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
   const pages = pdfDoc.getPages();
   const firstPage = pages[0];
@@ -135,7 +134,6 @@ export async function modifyPdf(
   const pageHeight = firstPage.getSize().height;
   let yPos = pageHeight - 2350; // Начальная позиция Y
 
-  // Вставка каждого элемента LetterData
   // Вставка текста
   let result = await drawTextWrappedAndCentered(firstPage, letterData.name + ",", regularFont, 64, yPos, 80); // Имя
   result.yPos -= 80; // Сдвигаем позицию вниз

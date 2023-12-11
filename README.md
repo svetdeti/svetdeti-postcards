@@ -15,3 +15,20 @@ letterText: string;
 momentGift: string;
 signature: string;
 }
+
+answer is pdf file
+
+---
+
+http://localhost:3000/send-email
+
+body format:
+{
+email: string;
+name: string;
+letterText: string;
+momentGift: string;
+signature: string;
+}
+
+send an email using .env settings
