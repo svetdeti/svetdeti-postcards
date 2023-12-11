@@ -137,7 +137,8 @@ export async function modifyPdf(
   // Вставка текста
   let result = await drawTextWrappedAndCentered(firstPage, letterData.name + ",", regularFont, 64, yPos, 80); // Имя
   result.yPos -= 80; // Сдвигаем позицию вниз
-  result = await drawTextWrappedAndCentered(firstPage, letterData.letterText, regularFont, 48, result.yPos, 60); // Основной текст
+  const text = `Я помню, как ${letterData.letterText}\nЭтот момент подарил мне ${letterData.momentGift}.`;
+  result = await drawTextWrappedAndCentered(firstPage, text, regularFont, 48, result.yPos, 60); // Основной текст
   result.yPos -= 120; // Дополнительный отступ для следующего абзаца
 
   let regularText = "И, продолжая добрые истории, я отправляю пожертвование в благотворительный фонд ";
@@ -153,13 +154,13 @@ export async function modifyPdf(
   await addLinkToPage(firstPage, linkText, boldFont, 48, xPosForLink, result.yPos, url);
 
   result.yPos -= 120;
-  result = await drawTextWrappedAndCentered(firstPage, letterData.momentGift, regularFont, 48, result.yPos, 60);
+  result = await drawTextWrappedAndCentered(firstPage, "Пусть в Новом году светлых моментов будет больше!", regularFont, 48, result.yPos, 60);
   result.yPos -= 60;
   result = await drawTextWrappedAndCentered(firstPage, letterData.signature, regularFont, 48, result.yPos, 60);
   result.yPos -= 120;
 
   regularText = "Если вы тоже хотите напомнить кому-то о Светлом моменте, ";
-  linkText = "нажми сюда";
+  linkText = "нажмите сюда";
   linkTextWidth = regularFont.widthOfTextAtSize(linkText, 48);
   url = "https://clck.ru/36sjbL"; // URL для ссылки
   result = await drawTextWrappedAndCentered(firstPage, regularText, regularFont, 48, result.yPos, 60);
