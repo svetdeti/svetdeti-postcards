@@ -132,7 +132,7 @@ export async function modifyPdf(
   const firstPage = pages[0];
 
   const pageHeight = firstPage.getSize().height;
-  let yPos = pageHeight - 2350; // Начальная позиция Y
+  let yPos = pageHeight - 2450; // Начальная позиция Y
 
   // Вставка текста
   let result = await drawTextWrappedAndCentered(firstPage, letterData.name + ",", regularFont, 64, yPos, 80); // Имя
