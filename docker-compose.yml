@@ -2,5 +2,12 @@ version: "3"
 services:
   app:
     build: .
+    image: sveddeti-send-email
     ports:
       - "3000:3000"
+    environment:
+      - SMTP_SERVICE=SMTP
+      - SMTP_USER=team@cuvilab.com
+      - SMTP_PASS=Qwe123ewQ!
+      - SMTP_HOST=cpanel9.c.fozzy.com
+      - SMTP_PORT=465
