@@ -65,11 +65,6 @@ app.post("/send-email", async (req: Request, res: Response) => {
       from: `Команда «свет.дети» ${process.env.EMAIL_FROM}`,
       to: letterData.email,
       subject: "Ваша открытка со светлым моментом",
-      headers: {
-        'X-UNISENDER-GO': JSON.stringify({
-          "skip_unsubscribe": 1,
-        }),
-      },
       text: `Здравствуйте!
 
       Ваша новогодняя открытка прилагается к этому письму. Спасибо, что делитесь светлыми моментами и помогаете детям выздоравливать!
