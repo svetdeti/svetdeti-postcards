@@ -58,22 +58,18 @@ app.post("/send-email", async (req: Request, res: Response) => {
     const pdfBytes = await modifyPdf(letterData, fontPaths, existingPdfPath);
     dotenv.config();
     // Create a Nodemailer transporter
-    const transporter = nodemailer.createTransport({
-      service: process.env.SMTP_SERVICE,
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || "587"), // Use the correct SMTP port for your email service
-      secure: true, // Use secure connection (SSL/TLS) if required by your email service
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    const transporter = nodemailer.createTransport(process.env.SMTP_URL);
 
     // Define email options
     const mailOptions = {
-      from: `Команда «свет.дети» ${process.env.SMTP_USER}`,
+      from: `Команда «свет.дети» ${process.env.EMAIL_FROM}`,
       to: letterData.email,
       subject: "Ваша открытка со светлым моментом",
+      headers: {
+        'X-UNISENDER-GO': JSON.stringify({
+          "skip_unsubscribe": 1,
+        }),
+      },
       text: `Здравствуйте!
 
       Ваша новогодняя открытка прилагается к этому письму. Спасибо, что делитесь светлыми моментами и помогаете детям выздоравливать!
