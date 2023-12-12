@@ -2,8 +2,8 @@ version: "3"
 services:
   app:
     build: .
-    image: sveddeti-send-email
+    image: svetdeti-send-email
     ports:
       - "3000:3000"
     environment:
-      - SMTP_URL=smtp://user:api_key@smtp.go2.unisender.ru/?tls.rejectUnauthorized=false
+      - SMTP_URL=
