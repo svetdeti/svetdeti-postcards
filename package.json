@@ -7,7 +7,7 @@
     "start": "node build/index.js",
     "test": "jest",
     "dev": "nodemon",
-    "copy-files": "cp -r ./src/postcard.pdf ./src/Rubik ./public ./build",
+    "copy-files": "cp -r ./src/postcard.pdf ./src/Rubik ./build",
     "build": "rimraf ./build && tsc && npm run copy-files "
   },
   "author": "",

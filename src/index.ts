@@ -11,7 +11,7 @@ import { Attachment } from "nodemailer/lib/mailer";
 const app = express();
 const port = 3000;
 
-app.use(express.static("public")); // Раздача статических файлов
+// app.use(express.static("public")); // Раздача статических файлов
 app.use(express.urlencoded({ extended: true })); // Для разбора данных формы
 
 app.use(bodyParser.json());
