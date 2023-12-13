@@ -9,7 +9,6 @@ import dotenv from "dotenv";
 import { Attachment } from "nodemailer/lib/mailer";
 
 const app = express();
-const port = 3000;
 
 // app.use(express.static("public")); // Раздача статических файлов
 app.use(express.urlencoded({ extended: true })); // Для разбора данных формы
@@ -32,7 +31,10 @@ app.post("/submit-letter", async (req: Request, res: Response) => {
 
     // Отправка файла клиенту
     res.setHeader("Content-Type", "application/pdf");
-    res.setHeader("Content-Disposition", "attachment; filename=postcard-modified.pdf");
+    res.setHeader(
+      "Content-Disposition",
+      "attachment; filename=postcard-modified.pdf"
+    );
     res.send(Buffer.from(pdfBytes));
   } catch (error) {
     if (error instanceof Error) {
@@ -58,7 +60,13 @@ app.post("/send-email", async (req: Request, res: Response) => {
     const pdfBytes = await modifyPdf(letterData, fontPaths, existingPdfPath);
     dotenv.config();
     // Create a Nodemailer transporter
-    const transporter = nodemailer.createTransport(process.env.SMTP_URL);
+    const transporter = nodemailer.createTransport(process.env.SMTP_URL, {
+      headers: {
+        "X-UNIONE": JSON.stringify({
+          skip_unsubscribe: 1,
+        }),
+      },
+    });
 
     // Define email options
     const mailOptions = {
@@ -613,7 +621,9 @@ app.post("/send-email", async (req: Request, res: Response) => {
     res.status(200).json({ message: "Email sent successfully" });
   } catch (error) {
     console.error("Error sending email:", error);
-    res.status(500).json({ error: "An error occurred while sending the email" });
+    res
+      .status(500)
+      .json({ error: "An error occurred while sending the email" });
   }
 });
 
