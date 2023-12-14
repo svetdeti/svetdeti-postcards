@@ -609,7 +609,7 @@ app.post("/send-email", async (req: Request, res: Response) => {
  `,
       attachments: [
         {
-          filename: `${letterData.name}-postcard.pdf`,
+          filename: `postcard.pdf`,
           content: pdfBytes,
         } as Attachment, // Type assertion to match the Attachment type
       ],
