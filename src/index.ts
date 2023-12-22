@@ -60,13 +60,7 @@ app.post("/send-email", async (req: Request, res: Response) => {
     const pdfBytes = await modifyPdf(letterData, fontPaths, existingPdfPath);
     dotenv.config();
     // Create a Nodemailer transporter
-    const transporter = nodemailer.createTransport(process.env.SMTP_URL, {
-      headers: {
-        "X-UNIONE": JSON.stringify({
-          skip_unsubscribe: 1,
-        }),
-      },
-    });
+    const transporter = nodemailer.createTransport(process.env.SMTP_URL);
 
     // Define email options
     const mailOptions = {
